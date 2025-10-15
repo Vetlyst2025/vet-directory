@@ -1,0 +1,68 @@
+$ next dev --turbopack
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'allowedDevOrigins' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+   ▲ Next.js 15.5.3 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://169.254.0.21:3000
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · allowedDevOrigins
+
+ ✓ Starting...
+ ✓ Ready in 1490ms
+ ○ Compiling / ...
+ ✓ Compiled / in 6.6s
+ GET / 200 in 7338ms
+ ⚠ Cross origin request detected from smart-pots-tickle.lindy.site to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ○ Compiling /favicon.ico ...
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 1479ms
+ ✓ Compiled /favicon.ico in 1615ms
+ GET /api/cities 200 in 2095ms
+ GET /api/clinics? 200 in 1863ms
+ GET /api/clinics? 200 in 528ms
+ GET / 200 in 192ms
+ GET /api/cities 200 in 636ms
+ GET /api/clinics? 200 in 833ms
+ GET /api/clinics? 200 in 515ms
+ GET / 200 in 757ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 353ms
+ GET /api/cities 200 in 1126ms
+ GET /api/clinics? 200 in 1059ms
+ GET /api/clinics? 200 in 531ms
+ ○ Compiling /clinic/[slug] ...
+ ✓ Compiled /clinic/[slug] in 1073ms
+Error: Route "/clinic/[slug]" used `params.slug`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at ClinicPage (app/clinic/[slug]/page.tsx:64:41)
+  62 |
+  63 | export default async function ClinicPage({ params }: { params: { slug: string } }) {
+> 64 |   const clinic = await getClinic(params.slug);
+     |                                         ^
+  65 |
+  66 |   if (!clinic) {
+  67 |     notFound();
+Error: Route "/clinic/[slug]" used `params.slug`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (app/clinic/[slug]/page.tsx:44:41)
+  42 |
+  43 | export async function generateMetadata({ params }: { params: { slug: string } }) {
+> 44 |   const clinic = await getClinic(params.slug);
+     |                                         ^
+  45 |   
+  46 |   if (!clinic) {
+  47 |     return {
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 3124ms
+ ✓ Compiled in 329ms
+ ✓ Compiled /clinic/[slug] in 42ms
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 1047ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 282ms
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 623ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 272ms
+ GET / 200 in 111ms
+ GET /api/cities 200 in 497ms
+ GET /api/clinics? 200 in 712ms
+ GET /api/cities 200 in 416ms
+ GET /api/clinics? 200 in 509ms
+ GET /api/clinics? 200 in 493ms
+ GET /api/clinics? 200 in 496ms
+ HEAD / 200 in 179ms

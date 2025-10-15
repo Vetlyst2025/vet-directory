@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐾 Madison Vet Finder
 
-## Getting Started
+A modern, full-featured veterinary clinic directory and lead generation platform for Madison, WI.
 
-First, run the development server:
+## 🌟 Features
+
+- **99+ Verified Clinic Listings** - Comprehensive directory of Madison-area veterinary clinics
+- **Smart Search & Filters** - Search by name, filter by city and clinic type
+- **Individual Clinic Pages** - Detailed profiles with hours, services, ratings, and maps
+- **Appointment Request System** - Simple lead forms that email clinics directly
+- **Featured Listings** - Premium placement for partner clinics
+- **Mobile Responsive** - Beautiful design on all devices
+- **SEO Optimized** - Individual pages for each clinic with proper metadata
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **UI**: shadcn/ui + Tailwind CSS
+- **Database**: Supabase (PostgreSQL)
+- **Email**: Resend API
+- **Hosting**: Vercel
+- **Package Manager**: Bun
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+ or Bun
+- Supabase account
+- Resend account (for emails)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/madison-vet-finder.git
+cd madison-vet-finder
+
+# Install dependencies
+bun install
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your Supabase and Resend credentials
+
+# Run development server
+bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file with:
 
-## Learn More
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+RESEND_API_KEY=your_resend_api_key
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🗄️ Database Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The database schema is in `SUPABASE_SETUP.md`. Key tables:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `clinics_madison_wi` - Clinic listings with full details
+- `appointment_requests` - Lead capture and tracking
 
-## Deploy on Vercel
+## 📧 Email Notifications
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+When a pet owner requests an appointment:
+1. Form data is saved to Supabase
+2. Email sent to clinic via Resend API
+3. Clinic receives appointment request details
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 Design System
+
+- **Colors**: Blue (trust), Green (health), Purple (premium)
+- **Typography**: Clean, modern, accessible
+- **Components**: shadcn/ui for consistency
+- **Icons**: Lucide React
+
+## 📱 Pages
+
+- `/` - Main directory with search and filters
+- `/clinic/[slug]` - Individual clinic profile pages
+- `/admin/appointments` - Admin dashboard (future)
+
+## 🚀 Deployment
+
+See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed instructions.
+
+**Quick deploy to Vercel:**
+
+```bash
+npx vercel --prod
+```
+
+## 📈 Roadmap
+
+- [ ] Admin dashboard for clinics
+- [ ] Payment integration for featured listings
+- [ ] Expand to other Wisconsin cities
+- [ ] Mobile app
+- [ ] Review system
+- [ ] Online booking integration
+
+## 🤝 Contributing
+
+This is a private MVP. Contact the owner for collaboration opportunities.
+
+## 📄 License
+
+Proprietary - All rights reserved
+
+## 📞 Contact
+
+For business inquiries: practicemanager@healthypetvetclinic.com
+
+---
+
+**Built with ❤️ for pet owners and veterinary clinics in Madison, WI**

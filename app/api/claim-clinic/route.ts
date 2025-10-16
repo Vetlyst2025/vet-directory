@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -54,6 +53,7 @@ export async function POST(request: NextRequest) {
 
     // Send email notification to admin
     try {
+            const resend = new Resend(process.env.RESEND_API_KEY);
       await resend.emails.send({
         from: 'VetFinderPro <noreply@vetfinderpro.com>',
         to: 'practicemanager@healthypetvetclinic.com',

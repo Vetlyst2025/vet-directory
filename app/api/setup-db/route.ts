@@ -14,7 +14,7 @@ export async function GET() {
       .select('id, accepts_appointments, is_featured')
       .limit(1);
 
-    let columnsExist = !checkError;
+    const columnsExist = !checkError;
     
     // Try to update some clinics to featured (this will also test if columns exist)
     const { data: updateData, error: updateError } = await supabase
@@ -32,7 +32,7 @@ export async function GET() {
       .select('*')
       .limit(1);
 
-    let appointmentTableExists = !appointmentError;
+    const appointmentTableExists = !appointmentError;
 
     return NextResponse.json({ 
       success: true,

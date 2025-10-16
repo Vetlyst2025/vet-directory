@@ -13,11 +13,6 @@ import dynamic from 'next/dynamic';
 import { Header } from '@/components/header';
 import { createClinicSlug } from '@/lib/utils-clinic';
 
-const MapView = dynamic(() => import('@/components/MapView'), {
-  ssr: false,
-  loading: () => <div className="h-[500px] bg-slate-100 rounded-lg animate-pulse" />
-});
-
 interface Clinic {
   place_id: string;
   clinic_name: string;
@@ -47,8 +42,6 @@ export default function Home() {
   const [selectedCity, setSelectedCity] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
   const [sortBy, setSortBy] = useState('name');
-  const [showMap, setShowMap] = useState(false);
-
   useEffect(() => {
     fetchClinics();
   }, []);
@@ -144,23 +137,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex gap-2">
-            <Button 
-              onClick={() => setShowMap(!showMap)}
-              variant={showMap ? "default" : "outline"}
-              className="w-full"
-            >
-              {showMap ? 'Hide Map' : 'Show Map'}
-            </Button>
           </div>
-        </div>
-
-        {/* Map View */}
-        {showMap && (
-          <div className="mb-8 rounded-lg overflow-hidden shadow-md">
-            <MapView clinics={filteredClinics} />
-          </div>
-        )}
 
         {/* Results Count */}
         <div className="mb-4">

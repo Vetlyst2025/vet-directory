@@ -120,3 +120,4 @@ For business inquiries: practicemanager@healthypetvetclinic.com
 ---
 
 **Built with ❤️ for pet owners and veterinary clinics in Madison, WI**
+# Vetlyst Clinic Directory - Updated Thu Oct 16 10:51:06 AM CDT 2025

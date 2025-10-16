@@ -13,7 +13,7 @@ interface AppointmentRequestModalProps {
   isOpen: boolean;
   onClose: () => void;
   clinic: {
-    id: number;
+    id: string;
     name: string;
     email?: string;
   };

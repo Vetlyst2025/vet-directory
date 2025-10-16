@@ -91,9 +91,9 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
       {/* Back Link */}
       <div className="bg-[#F5F7FA] border-b border-[#E8EEF5]">
         <div className="max-w-7xl mx-auto px-4 py-4">
-          <Link href="/" className="text-[#0F3A5C] hover:text-[#D4AF37] font-medium transition-colors flex items-center gap-1">
+          <a href="/" className="text-[#0F3A5C] hover:text-[#D4AF37] font-medium transition-colors flex items-center gap-1">
             ← Back to Directory
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -155,7 +155,7 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
                         className="text-[#0F3A5C] hover:text-[#D4AF37] font-medium transition-colors"
                       >
                         {clinic.phone}
-                      </Link>
+                      </a>
                     </div>
                   )}
 
@@ -169,7 +169,7 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
                         className="text-[#0F3A5C] hover:text-[#D4AF37] font-medium transition-colors"
                       >
                         Visit Website
-                      </Link>
+                      </a>
                     </div>
                   )}
                 </div>
@@ -267,7 +267,7 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
                       <a href={`tel:${clinic.phone}`}>
                         <Phone className="h-4 w-4 mr-2" />
                         Call Now
-                      </Link>
+                      </a>
                     </Button>
                   )}
                   {clinic.site && (
@@ -275,7 +275,7 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
                       <a href={clinic.site} target="_blank" rel="noopener noreferrer">
                         <Globe className="h-4 w-4 mr-2" />
                         Visit Website
-                      </Link>
+                      </a>
                     </Button>
                   )}
                   <Button variant="outline" className="w-full border-[#0F3A5C] text-[#0F3A5C] hover:bg-[#F5F7FA]" asChild>
@@ -286,7 +286,7 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
                     >
                       <MapPin className="h-4 w-4 mr-2" />
                       Get Directions
-                    </Link>
+                    </a>
                   </Button>
                 </div>
               </CardContent>
@@ -314,9 +314,9 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
                   Get more appointment requests and grow your practice with Madison Vet Finder.
                 </p>
                 <Button variant="outline" className="w-full border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0F3A5C] font-semibold" asChild>
-                  <Link href="/for-clinics">
+                  <a href="/for-clinics">
                     Learn More
-                  </Link>
+                  </a>
                 </Button>
               </CardContent>
             </Card>
@@ -335,15 +335,15 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
             <div>
               <h4 className="font-semibold mb-2">For Pet Owners</h4>
               <ul className="text-sm space-y-1 text-[#E8EEF5]">
-                <li><Link href="/" className="hover:text-[#D4AF37] transition-colors">Browse Clinics</Link></li>
-                <li><Link href="/" className="hover:text-[#D4AF37] transition-colors">Request Appointment</Link></li>
+                <li><a href="/" className="hover:text-[#D4AF37] transition-colors">Browse Clinics</a></li>
+                <li><a href="/" className="hover:text-[#D4AF37] transition-colors">Request Appointment</a></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-2">For Clinics</h4>
               <ul className="text-sm space-y-1 text-[#E8EEF5]">
-                <li><Link href="/for-clinics" className="hover:text-[#D4AF37] transition-colors">Claim Your Clinic</Link></li>
-                <li><Link href="/for-clinics" className="hover:text-[#D4AF37] transition-colors">Get More Appointments</Link></li>
+                <li><a href="/for-clinics" className="hover:text-[#D4AF37] transition-colors">Claim Your Clinic</a></li>
+                <li><a href="/for-clinics" className="hover:text-[#D4AF37] transition-colors">Get More Appointments</a></li>
               </ul>
             </div>
           </div>

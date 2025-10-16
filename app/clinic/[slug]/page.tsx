@@ -200,7 +200,7 @@ export default function ClinicPage({ params }: ClinicPageProps) {
             <Card className="border-[#E8EEF5] bg-gradient-to-br from-[#0F3A5C] to-[#1a5a8c] text-white">
               <CardContent className="pt-6">
                 <h3 className="text-lg font-semibold mb-4">Request an Appointment</h3>
-                <AppointmentRequestButton clinicName={clinic.name} />
+                <AppointmentRequestButton clinic={{ id: clinic.id.toString(), name: clinic.name, email: clinic.email }} />
               </CardContent>
             </Card>
 

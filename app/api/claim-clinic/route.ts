@@ -52,8 +52,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Send email notification to admin
+    // Initialize Resend for email sending
+
+const resend = new Resend(process.env.RESEND_API_KEY);
     try {
-            const resend = new Resend(process.env.RESEND_API_KEY);
       await resend.emails.send({
         from: 'VetFinderPro <noreply@vetfinderpro.com>',
         to: 'practicemanager@healthypetvetclinic.com',

@@ -2,7 +2,6 @@ import { supabase } from '@/lib/supabase';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
@@ -62,6 +61,8 @@ export async function POST(request: Request) {
     // Send email notification to clinic
     if (clinicEmail && process.env.RESEND_API_KEY) {
       try {
+                // Initialize Resend only if API key exists
+                const resend = new Resend(process.env.RESEND_API_KEY);
         // Format the preferred date nicely
         const formattedDate = preferredDate ? new Date(preferredDate).toLocaleDateString('en-US', {
           weekday: 'long',

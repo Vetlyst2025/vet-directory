@@ -11,7 +11,7 @@ import { MapPin, Phone, Globe, Clock, Star } from "lucide-react";
 import { Header } from "@/components/header";
 import { ClaimClinicModal } from "@/components/claim-clinic-modal";
 import { AppointmentRequestButton } from "@/components/appointment-request-button";
-import { MapView } from "@/components/MapView";
+import MapView from "@/components/MapView";
 
 interface ClinicPageProps {
   params: {

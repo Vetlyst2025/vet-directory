@@ -46,71 +46,86 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  
+  /* Madison Vet Finder Brand Colors */
+  --navy-dark: #0F3A5C;
+  --navy-light: #1A4D6D;
+  --gold: #D4AF37;
+  --gold-light: #E8C547;
+  --white: #FFFFFF;
+  --off-white: #F5F7FA;
+  --dark-gray: #2C3E50;
+  --light-gray: #E8EEF5;
+  --teal: #17A2B8;
+  --green: #28A745;
+  --red: #DC3545;
+  
+  /* Primary Colors */
+  --background: #FFFFFF;
+  --foreground: #2C3E50;
+  --card: #FFFFFF;
+  --card-foreground: #2C3E50;
+  --popover: #FFFFFF;
+  --popover-foreground: #2C3E50;
+  --primary: #0F3A5C;
+  --primary-foreground: #FFFFFF;
+  --secondary: #D4AF37;
+  --secondary-foreground: #0F3A5C;
+  --muted: #F5F7FA;
+  --muted-foreground: #7A8FA3;
+  --accent: #D4AF37;
+  --accent-foreground: #0F3A5C;
+  --destructive: #DC3545;
+  --border: #E8EEF5;
+  --input: #F5F7FA;
+  --ring: #0F3A5C;
+  --chart-1: #0F3A5C;
+  --chart-2: #1A4D6D;
+  --chart-3: #D4AF37;
+  --chart-4: #17A2B8;
+  --chart-5: #28A745;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #2C3E50;
+  --sidebar-primary: #0F3A5C;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #D4AF37;
+  --sidebar-accent-foreground: #0F3A5C;
+  --sidebar-border: #E8EEF5;
+  --sidebar-ring: #0F3A5C;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #0F3A5C;
+  --foreground: #FFFFFF;
+  --card: #1A4D6D;
+  --card-foreground: #FFFFFF;
+  --popover: #1A4D6D;
+  --popover-foreground: #FFFFFF;
+  --primary: #D4AF37;
+  --primary-foreground: #0F3A5C;
+  --secondary: #1A4D6D;
+  --secondary-foreground: #FFFFFF;
+  --muted: #2C3E50;
+  --muted-foreground: #A8B8C8;
+  --accent: #D4AF37;
+  --accent-foreground: #0F3A5C;
+  --destructive: #FF6B6B;
+  --border: #2C3E50;
+  --input: #1A4D6D;
+  --ring: #D4AF37;
+  --chart-1: #D4AF37;
+  --chart-2: #17A2B8;
+  --chart-3: #28A745;
+  --chart-4: #E8C547;
+  --chart-5: #FFFFFF;
+  --sidebar: #0F3A5C;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #D4AF37;
+  --sidebar-primary-foreground: #0F3A5C;
+  --sidebar-accent: #1A4D6D;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #2C3E50;
+  --sidebar-ring: #D4AF37;
 }
 
 @layer base {
@@ -125,7 +140,105 @@
   
   h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.02em;
+    color: var(--navy-dark);
   }
+  
+  /* Brand-specific styling */
+  a {
+    @apply text-primary hover:opacity-80 transition-opacity;
+  }
+  
+  button {
+    @apply transition-all duration-200;
+  }
+}
+
+/* Header Styles */
+.header-brand {
+  background: linear-gradient(to right, var(--navy-dark), var(--navy-light));
+  border-bottom: 4px solid var(--gold);
+}
+
+.header-brand h1 {
+  color: white;
+}
+
+.header-brand p {
+  color: var(--gold);
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(to right, var(--navy-dark), var(--navy-light));
+}
+
+.hero-section h2 {
+  color: white;
+}
+
+.hero-section p {
+  color: var(--gold);
+}
+
+/* Footer */
+.footer-brand {
+  background: linear-gradient(to right, var(--navy-dark), var(--navy-light));
+  border-top: 4px solid var(--gold);
+}
+
+.footer-brand h3,
+.footer-brand h4 {
+  color: white;
+}
+
+.footer-brand p {
+  color: var(--gold);
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--navy-dark);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--navy-light);
+}
+
+.btn-gold {
+  background-color: var(--gold);
+  color: var(--navy-dark);
+}
+
+.btn-gold:hover {
+  background-color: var(--gold-light);
+}
+
+/* Card Styles */
+.card-brand {
+  border-color: var(--light-gray);
+  background-color: white;
+}
+
+.card-brand h2,
+.card-brand h3 {
+  color: var(--navy-dark);
+}
+
+/* Badge Styles */
+.badge-gold {
+  background-color: var(--gold);
+  color: var(--navy-dark);
+}
+
+.badge-navy {
+  background-color: var(--navy-dark);
+  color: white;
+}
+
+.badge-green {
+  background-color: var(--green);
+  color: white;
 }
 
 /*
@@ -134,4 +247,14 @@
 */
 nextjs-portal {
   display: none;
+}
+
+/* Emergency Clinic Badge - Red with White Text */
+.badge-emergency {
+  background-color: var(--red);
+  color: white;
+}
+
+.badge-emergency:hover {
+  background-color: #c82333;
 }

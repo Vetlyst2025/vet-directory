@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,8 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Search, Phone, Globe, MapPin, Star, Clock, Calendar } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { AppointmentRequestModal } from '@/components/appointment-request-modal';
-import Link from 'next/link';
+import { Header } from '@/components/header';
 import { createClinicSlug } from '@/lib/utils-clinic';
 
 const MapView = dynamic(() => import('@/components/MapView'), {
@@ -35,8 +35,8 @@ interface Clinic {
   reviews: number;
   photo_final: string;
   working_hours_csv_compatible: string;
-  accepts_appointments?: boolean;
-  is_featured?: boolean;
+  listing_tier?: string;
+  emergency_status?: string;
 }
 
 export default function Home() {
@@ -94,39 +94,41 @@ export default function Home() {
     setShowAppointmentModal(true);
   };
 
+  // Match the exact clinic types from the database
   const clinicTypes = [
     'General Practice',
-    'Emergency / Urgent Care',
+    'Emergency/Urgent Care',
     'Mobile Clinic',
     'Low Cost / No Cost'
   ];
 
+  // Function to get badge styling based on clinic type
+  const getClinicTypeBadgeClass = (type: string) => {
+    if (type === 'Emergency/Urgent Care') {
+      return 'badge-emergency';
+    }
+    return 'badge-navy';
+  };
+
+  // Check if clinic is a paid listing (has a non-empty listing_tier)
+  const isPaidListing = (clinic: Clinic) => {
+    return clinic.listing_tier && clinic.listing_tier.trim() !== '';
+  };
+
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <header className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-semibold text-slate-900">Veterinary Directory</h1>
-              <p className="text-slate-600 mt-1">Madison, WI Area</p>
-            </div>
-            <div className="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center">
-              <span className="text-xs text-slate-500">Logo</span>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-white">
+      {/* Header with Logo */}
+      <Header />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Search and Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div className="card-brand rounded-lg shadow-md p-6 mb-6 border-t-4" style={{ borderTopColor: 'var(--gold)' }}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Search */}
             <div className="lg:col-span-1">
               <div className="relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                <Search className="absolute left-3 top-3 h-4 w-4" style={{ color: 'var(--navy-dark)' }} />
                 <Input
                   placeholder="Search by clinic name..."
                   value={search}
@@ -184,6 +186,7 @@ export default function Home() {
               variant={!showMap ? 'default' : 'outline'}
               onClick={() => setShowMap(false)}
               size="sm"
+              className={!showMap ? 'btn-primary' : ''}
             >
               List View
             </Button>
@@ -191,195 +194,172 @@ export default function Home() {
               variant={showMap ? 'default' : 'outline'}
               onClick={() => setShowMap(true)}
               size="sm"
+              className={showMap ? 'btn-primary' : ''}
             >
               Map View
             </Button>
           </div>
         </div>
 
-        {/* Results Count */}
-        <div className="mb-4">
-          <p className="text-slate-600">
-            {loading ? 'Loading...' : `${clinics.length} clinics found`}
-          </p>
-        </div>
-
-        {/* Map View */}
-        {showMap && (
-          <div className="mb-6">
-            <MapView clinics={clinics} />
-          </div>
-        )}
-
-        {/* Clinics Grid */}
-        {!showMap && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {loading ? (
-              // Loading skeletons
-              Array.from({ length: 6 }).map((_, i) => (
-                <Card key={i} className="animate-pulse">
-                  <CardHeader>
-                    <div className="h-6 bg-slate-200 rounded w-3/4"></div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div className="h-4 bg-slate-200 rounded"></div>
-                      <div className="h-4 bg-slate-200 rounded w-5/6"></div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))
-            ) : clinics.length === 0 ? (
-              <div className="col-span-full text-center py-12">
-                <p className="text-slate-500">No clinics found matching your criteria</p>
-              </div>
-            ) : (
-              clinics.map((clinic) => (
-                <Card key={clinic.place_id} className={`hover:shadow-lg transition-shadow ${clinic.is_featured ? 'ring-2 ring-blue-500' : ''}`}>
-                  {clinic.photo_final && (
-                    <div className="h-48 overflow-hidden rounded-t-lg relative">
-                      <img
-                        src={clinic.photo_final}
-                        alt={clinic.clinic_name}
-                        className="w-full h-full object-cover"
-                      />
-                      {clinic.is_featured && (
-                        <Badge className="absolute top-2 right-2 bg-blue-600">
-                          ✨ Featured
-                        </Badge>
-                      )}
-                    </div>
-                  )}
-                  <CardHeader>
-                    <CardTitle className="text-lg">{clinic.clinic_name}</CardTitle>
-                    <div className="flex items-center gap-2 mt-2">
-                      {clinic.rating && (
-                        <div className="flex items-center gap-1">
-                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                          <span className="text-sm font-medium">{clinic.rating}</span>
-                          {clinic.reviews && (
-                            <span className="text-xs text-slate-500">({clinic.reviews})</span>
-                          )}
+        {/* Results */}
+        {showMap ? (
+          <MapView clinics={clinics} />
+        ) : (
+          <>
+            <p className="text-gray-600 mb-4">{clinics.length} clinics found</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {clinics.map((clinic) => (
+                <Card key={clinic.place_id} className="card-brand hover:shadow-lg transition-shadow">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1">
+                        <CardTitle className="text-lg">{clinic.clinic_name}</CardTitle>
+                        <div className="flex items-center gap-2 mt-2">
+                          <div className="flex items-center">
+                            <Star className="h-4 w-4 fill-gold" style={{ color: 'var(--gold)' }} />
+                            <span className="ml-1 text-sm font-semibold">{clinic.rating}</span>
+                            <span className="text-xs text-gray-500 ml-1">({clinic.reviews})</span>
+                          </div>
                         </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      <Badge className={getClinicTypeBadgeClass(clinic.clinic_type)}>
+                        {clinic.clinic_type}
+                      </Badge>
+                      {isPaidListing(clinic) && (
+                        <Badge className="badge-gold">✨ Featured</Badge>
                       )}
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <div className="flex gap-2 flex-wrap">
-                      {clinic.clinic_type && (
-                        <Badge variant="secondary">{clinic.clinic_type}</Badge>
-                      )}
-                      {clinic.accepts_appointments && (
-                        <Badge variant="outline" className="border-green-500 text-green-700">
-                          🎯 Accepts Requests
-                        </Badge>
-                      )}
-                    </div>
-                    
-                    {clinic.full_address && (
-                      <div className="flex items-start gap-2 text-sm text-slate-600">
-                        <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    {clinic.photo_final && (
+                      <img
+                        src={clinic.photo_final}
+                        alt={clinic.clinic_name}
+                        className="w-full h-40 object-cover rounded-md"
+                      />
+                    )}
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-start gap-2">
+                        <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" style={{ color: 'var(--navy-dark)' }} />
                         <span>{clinic.full_address}</span>
                       </div>
-                    )}
-
-                    {clinic.phone && (
                       <div className="flex items-center gap-2">
-                        <Phone className="h-4 w-4 text-slate-600" />
-                        <a
-                          href={`tel:${clinic.phone}`}
-                          className="text-sm text-blue-600 hover:underline"
-                        >
+                        <Phone className="h-4 w-4 flex-shrink-0" style={{ color: 'var(--navy-dark)' }} />
+                        <a href={`tel:${clinic.phone}`} className="hover:text-gold transition-colors">
                           {clinic.phone}
                         </a>
                       </div>
-                    )}
-
-                    {clinic.site && (
-                      <div className="flex items-center gap-2">
-                        <Globe className="h-4 w-4 text-slate-600" />
-                        <a
-                          href={clinic.site}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-blue-600 hover:underline truncate"
-                        >
-                          Visit Website
-                        </a>
-                      </div>
-                    )}
-
-                    {clinic.working_hours_csv_compatible && (
-                      <div className="flex items-start gap-2 text-xs text-slate-500">
-                        <Clock className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                        <div className="space-y-1">
-                          {clinic.working_hours_csv_compatible.split('|').slice(0, 2).map((hours, i) => (
-                            <div key={i}>{hours}</div>
-                          ))}
+                      {clinic.site && (
+                        <div className="flex items-center gap-2">
+                          <Globe className="h-4 w-4 flex-shrink-0" style={{ color: 'var(--navy-dark)' }} />
+                          <a href={clinic.site} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors truncate">
+                            Visit Website
+                          </a>
                         </div>
-                      </div>
-                    )}
-
-                    {clinic.species_treated && (
-                      <div className="text-xs text-slate-500">
-                        <span className="font-medium">Species: </span>
-                        {clinic.species_treated}
-                      </div>
-                    )}
-
-                    {/* Request Appointment Button */}
-                    {clinic.accepts_appointments && (
-                      <Button 
-                        onClick={() => handleRequestAppointment(clinic)}
-                        className="w-full mt-4"
-                        variant="default"
-                      >
-                        <Calendar className="h-4 w-4 mr-2" />
-                        Request Appointment
-                      </Button>
-                    )}
-                  </CardContent>
-
-                    {/* View Details Button */}
-                    <Button 
-                      asChild
-                      className="w-full mt-2"
-                      variant="outline"
+                      )}
+                    </div>
+                    <Link
+                      href={`/clinic/${createClinicSlug(clinic.clinic_name, clinic.place_id)}`}
+                      className="btn-primary w-full text-center py-2 rounded-lg font-semibold transition-colors"
                     >
-                      <Link href={`/clinic/${createClinicSlug(clinic.clinic_name, clinic.place_id)}`}>
-                        View Details
-                      </Link>
-                    </Button>
+                      View Details
+                    </Link>
+                  </CardContent>
                 </Card>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          </>
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <p className="text-center text-sm text-slate-500">
-            © 2025 Veterinary Directory - Madison, WI Area
-          </p>
+      {/* Appointment Modal */}
+      {showAppointmentModal && selectedClinic && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-md">
+            <CardHeader>
+              <CardTitle>Request Appointment</CardTitle>
+              <button
+                onClick={() => setShowAppointmentModal(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </CardHeader>
+            <CardContent>
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  try {
+                    const response = await fetch('/api/appointment-requests', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        clinic_id: selectedClinic.place_id,
+                        clinic_name: selectedClinic.clinic_name,
+                        clinic_email: selectedClinic.email,
+                        pet_owner_name: formData.get('name'),
+                        pet_owner_email: formData.get('email'),
+                        pet_owner_phone: formData.get('phone'),
+                        pet_name: formData.get('petName'),
+                        pet_type: formData.get('petType'),
+                        appointment_date: formData.get('date'),
+                        appointment_time: formData.get('time'),
+                        reason: formData.get('reason'),
+                      }),
+                    });
+                    if (response.ok) {
+                      alert('Appointment request sent!');
+                      setShowAppointmentModal(false);
+                    }
+                  } catch (error) {
+                    console.error('Error:', error);
+                    alert('Failed to send request');
+                  }
+                }}
+                className="space-y-4"
+              >
+                <div>
+                  <label className="block text-sm font-medium mb-1">Your Name</label>
+                  <Input name="name" required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Email</label>
+                  <Input name="email" type="email" required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Phone</label>
+                  <Input name="phone" type="tel" required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Pet Name</label>
+                  <Input name="petName" required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Pet Type</label>
+                  <Input name="petType" required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Preferred Date</label>
+                  <Input name="date" type="date" required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Preferred Time</label>
+                  <Input name="time" type="time" required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Reason for Visit</label>
+                  <Input name="reason" required />
+                </div>
+                <Button type="submit" className="w-full btn-primary">
+                  Send Request
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         </div>
-      </footer>
-
-      {/* Appointment Request Modal */}
-      {selectedClinic && (
-        <AppointmentRequestModal
-          isOpen={showAppointmentModal}
-          onClose={() => {
-            setShowAppointmentModal(false);
-            setSelectedClinic(null);
-          }}
-          clinic={{
-            id: selectedClinic.id,
-            name: selectedClinic.clinic_name,
-            email: selectedClinic.email
-          }}
-        />
       )}
     </div>
   );

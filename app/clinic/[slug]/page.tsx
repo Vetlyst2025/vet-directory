@@ -5,15 +5,18 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MapPin, Phone, Globe, Clock, Star, Calendar } from 'lucide-react';
 import Link from 'next/link';
+import { Header } from '@/components/header';
+import { ClaimClinicModal } from '@/components/claim-clinic-modal';
+import { AppointmentRequestButton } from '@/components/appointment-request-button';
 
 // Generate static params for all clinics
 export async function generateStaticParams() {
   const { data: clinics } = await supabase
     .from('clinics_madison_wi')
-    .select('place_id, name');
+    .select('place_id, clinic_name');
 
   return (clinics || []).map((clinic) => ({
-    slug: createSlug(clinic.name, clinic.place_id),
+    slug: createSlug(clinic.clinic_name, clinic.place_id),
   }));
 }
 
@@ -51,11 +54,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: `${clinic.name} - Madison Veterinarian | VetFinderPro`,
-    description: `${clinic.name} in ${clinic.city}, WI. ${clinic.rating ? `Rated ${clinic.rating} stars` : 'Quality veterinary care'} for your pets. ${clinic.address}. ${clinic.phone || 'Contact for appointments.'}`,
+    title: `${clinic.clinic_name} - Madison Veterinarian | Madison Vet Finder`,
+    description: `${clinic.clinic_name} in ${clinic.city}, WI. ${clinic.rating ? `Rated ${clinic.rating} stars` : 'Quality veterinary care'} for your pets. ${clinic.full_address}. ${clinic.phone || 'Contact for appointments.'}`,
     openGraph: {
-      title: clinic.name,
-      description: `${clinic.types?.join(', ') || 'Veterinary Clinic'} in ${clinic.city}, WI`,
+      title: clinic.clinic_name,
+      description: `${clinic.clinic_type || 'Veterinary Clinic'} in ${clinic.city}, WI`,
       type: 'website',
     },
   };
@@ -69,14 +72,26 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
     notFound();
   }
 
-  const hours = clinic.opening_hours ? JSON.parse(clinic.opening_hours) : null;
+  // Check if clinic is a paid listing (has listing_tier value)
+  const isPaidListing = clinic.listing_tier && clinic.listing_tier.trim() !== '';
+
+  // Parse working hours if available
+  const parseWorkingHours = (hoursString: string) => {
+    if (!hoursString) return [];
+    return hoursString.split('|').map((hour) => hour.trim()).filter(Boolean);
+  };
+
+  const workingHours = parseWorkingHours(clinic.working_hours_csv_compatible);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200">
+    <div className="min-h-screen bg-white">
+      {/* Header with Logo */}
+      <Header />
+
+      {/* Back Link */}
+      <div className="bg-[#F5F7FA] border-b border-[#E8EEF5]">
         <div className="max-w-7xl mx-auto px-4 py-4">
-          <Link href="/" className="text-blue-600 hover:text-blue-700 font-medium">
+          <Link href="/" className="text-[#0F3A5C] hover:text-[#D4AF37] font-medium transition-colors flex items-center gap-1">
             ← Back to Directory
           </Link>
         </div>
@@ -87,69 +102,71 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Clinic Header */}
-            <Card>
+            <Card className="border-[#E8EEF5] shadow-md">
               <CardContent className="pt-6">
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {clinic.is_featured && (
-                    <Badge className="bg-blue-600">Featured</Badge>
+                  {isPaidListing && (
+                    <Badge className="bg-[#D4AF37] text-[#0F3A5C] hover:bg-[#E8C547]">✨ Featured</Badge>
                   )}
-                  {clinic.accepts_appointments && (
-                    <Badge variant="outline" className="border-green-600 text-green-700">
-                      Accepts Requests
+                  {isPaidListing && (
+                    <Badge className="bg-[#28A745] text-white hover:bg-[#20c997]">
+                      🎯 Accepts Requests
                     </Badge>
                   )}
-                  {clinic.types?.includes('veterinary_care') && (
-                    <Badge variant="secondary">Veterinary Care</Badge>
+                  {clinic.clinic_type && (
+                    <Badge variant="secondary" className="bg-[#F5F7FA] text-[#0F3A5C] border border-[#E8EEF5]">
+                      {clinic.clinic_type}
+                    </Badge>
                   )}
                 </div>
 
-                <h1 className="text-3xl font-bold text-slate-900 mb-2">
-                  {clinic.name}
+                <h1 className="text-4xl font-bold text-[#0F3A5C] mb-2">
+                  {clinic.clinic_name}
                 </h1>
 
                 {clinic.rating && (
                   <div className="flex items-center gap-2 mb-4">
                     <div className="flex items-center">
-                      <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                      <span className="ml-1 font-semibold text-lg">{clinic.rating}</span>
+                      <Star className="h-5 w-5 fill-[#D4AF37] text-[#D4AF37]" />
+                      <span className="ml-1 font-semibold text-lg text-[#2C3E50]">{clinic.rating}</span>
                     </div>
-                    {clinic.user_ratings_total && (
-                      <span className="text-slate-600">
-                        ({clinic.user_ratings_total} reviews)
+                    {clinic.reviews && (
+                      <span className="text-[#7A8FA3]">
+                        ({clinic.reviews} reviews)
                       </span>
                     )}
                   </div>
                 )}
 
-                <div className="space-y-3 text-slate-700">
+                <div className="space-y-3 text-[#2C3E50]">
                   <div className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-slate-500 mt-0.5 flex-shrink-0" />
+                    <MapPin className="h-5 w-5 text-[#0F3A5C] mt-0.5 flex-shrink-0" />
                     <div>
-                      <p>{clinic.address}</p>
-                      <p>{clinic.city}, {clinic.state} {clinic.zip_code}</p>
+                      <p>{clinic.full_address}</p>
+                      <p>{clinic.city}, {clinic.state} {clinic.zip}</p>
                     </div>
                   </div>
 
                   {clinic.phone && (
                     <div className="flex items-center gap-3">
-                      <Phone className="h-5 w-5 text-slate-500 flex-shrink-0" />
+                      <Phone className="h-5 w-5 text-[#0F3A5C] flex-shrink-0" />
                       <a 
                         href={`tel:${clinic.phone}`}
-                        className="text-blue-600 hover:text-blue-700 font-medium"
+                        className="text-[#0F3A5C] hover:text-[#D4AF37] font-medium transition-colors"
                       >
                         {clinic.phone}
                       </a>
                     </div>
                   )}
 
-                  {clinic.website && (
+                  {clinic.site && (
                     <div className="flex items-center gap-3">
-                      <Globe className="h-5 w-5 text-slate-500 flex-shrink-0" />
+                      <Globe className="h-5 w-5 text-[#0F3A5C] flex-shrink-0" />
                       <a 
-                        href={clinic.website}
+                        href={clinic.site}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-700 font-medium"
+                        className="text-[#0F3A5C] hover:text-[#D4AF37] font-medium transition-colors"
                       >
                         Visit Website
                       </a>
@@ -160,21 +177,18 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
             </Card>
 
             {/* Opening Hours */}
-            {hours && hours.length > 0 && (
-              <Card>
+            {workingHours.length > 0 && (
+              <Card className="border-[#E8EEF5] shadow-md">
                 <CardContent className="pt-6">
-                  <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                  <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-[#0F3A5C]">
                     <Clock className="h-5 w-5" />
                     Hours of Operation
                   </h2>
                   <div className="space-y-2">
-                    {hours.map((hour: string, index: number) => (
-                      <div key={index} className="flex justify-between py-2 border-b border-slate-100 last:border-0">
-                        <span className="font-medium text-slate-700">
-                          {hour.split(': ')[0]}
-                        </span>
-                        <span className="text-slate-600">
-                          {hour.split(': ')[1] || 'Closed'}
+                    {workingHours.map((hour: string, index: number) => (
+                      <div key={index} className="flex justify-between py-2 border-b border-[#E8EEF5] last:border-0">
+                        <span className="text-[#2C3E50]">
+                          {hour}
                         </span>
                       </div>
                     ))}
@@ -184,14 +198,14 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
             )}
 
             {/* Services */}
-            {clinic.types && clinic.types.length > 0 && (
-              <Card>
+            {clinic.species_treated && (
+              <Card className="border-[#E8EEF5] shadow-md">
                 <CardContent className="pt-6">
-                  <h2 className="text-xl font-semibold mb-4">Services & Specialties</h2>
+                  <h2 className="text-xl font-semibold mb-4 text-[#0F3A5C]">Services & Specialties</h2>
                   <div className="flex flex-wrap gap-2">
-                    {clinic.types.map((type: string) => (
-                      <Badge key={type} variant="outline">
-                        {type.replace(/_/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase())}
+                    {clinic.species_treated.split(',').map((species: string, index: number) => (
+                      <Badge key={index} variant="outline" className="border-[#0F3A5C] text-[#0F3A5C] bg-[#F5F7FA]">
+                        {species.trim()}
                       </Badge>
                     ))}
                   </div>
@@ -201,10 +215,10 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
 
             {/* Map */}
             {clinic.latitude && clinic.longitude && (
-              <Card>
+              <Card className="border-[#E8EEF5] shadow-md">
                 <CardContent className="pt-6">
-                  <h2 className="text-xl font-semibold mb-4">Location</h2>
-                  <div className="aspect-video bg-slate-100 rounded-lg overflow-hidden">
+                  <h2 className="text-xl font-semibold mb-4 text-[#0F3A5C]">Location</h2>
+                  <div className="aspect-video bg-[#F5F7FA] rounded-lg overflow-hidden border border-[#E8EEF5]">
                     <iframe
                       width="100%"
                       height="100%"
@@ -222,45 +236,49 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Request Appointment CTA */}
-            {clinic.accepts_appointments && (
-              <Card className="border-2 border-blue-600 shadow-lg">
+            {isPaidListing && (
+              <Card className="border-2 border-[#D4AF37] shadow-lg bg-gradient-to-br from-[#0F3A5C] to-[#1A4D6D]">
                 <CardContent className="pt-6">
                   <div className="text-center space-y-4">
-                    <Calendar className="h-12 w-12 text-blue-600 mx-auto" />
-                    <h3 className="text-xl font-semibold">Request an Appointment</h3>
-                    <p className="text-slate-600 text-sm">
-                      Send a request and {clinic.name} will contact you to confirm.
+                    <Calendar className="h-12 w-12 text-[#D4AF37] mx-auto" />
+                    <h3 className="text-xl font-semibold text-white">Request an Appointment</h3>
+                    <p className="text-[#E8EEF5] text-sm">
+                      Send a request and {clinic.clinic_name} will contact you to confirm.
                     </p>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700" size="lg">
-                      Request Appointment
-                    </Button>
+                    <AppointmentRequestButton 
+                      clinic={{
+                        id: clinic.place_id,
+                        name: clinic.clinic_name,
+                        email: clinic.email
+                      }}
+                    />
                   </div>
                 </CardContent>
               </Card>
             )}
 
             {/* Quick Contact */}
-            <Card>
+            <Card className="border-[#E8EEF5] shadow-md">
               <CardContent className="pt-6">
-                <h3 className="font-semibold mb-4">Quick Contact</h3>
+                <h3 className="font-semibold mb-4 text-[#0F3A5C]">Quick Contact</h3>
                 <div className="space-y-3">
                   {clinic.phone && (
-                    <Button variant="outline" className="w-full" asChild>
+                    <Button variant="outline" className="w-full border-[#0F3A5C] text-[#0F3A5C] hover:bg-[#F5F7FA]" asChild>
                       <a href={`tel:${clinic.phone}`}>
                         <Phone className="h-4 w-4 mr-2" />
                         Call Now
                       </a>
                     </Button>
                   )}
-                  {clinic.website && (
-                    <Button variant="outline" className="w-full" asChild>
-                      <a href={clinic.website} target="_blank" rel="noopener noreferrer">
+                  {clinic.site && (
+                    <Button variant="outline" className="w-full border-[#0F3A5C] text-[#0F3A5C] hover:bg-[#F5F7FA]" asChild>
+                      <a href={clinic.site} target="_blank" rel="noopener noreferrer">
                         <Globe className="h-4 w-4 mr-2" />
                         Visit Website
                       </a>
                     </Button>
                   )}
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button variant="outline" className="w-full border-[#0F3A5C] text-[#0F3A5C] hover:bg-[#F5F7FA]" asChild>
                     <a 
                       href={`https://www.google.com/maps/dir/?api=1&destination=${clinic.latitude},${clinic.longitude}`}
                       target="_blank"
@@ -274,14 +292,28 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
               </CardContent>
             </Card>
 
-            {/* About VetFinderPro */}
-            <Card className="bg-gradient-to-br from-purple-50 to-blue-50">
+            {/* Claim This Clinic */}
+            <Card className="bg-gradient-to-br from-[#F5F7FA] to-[#E8EEF5] border-2 border-[#D4AF37] shadow-md">
+              <CardContent className="pt-6">
+                <h3 className="font-semibold mb-2 text-[#0F3A5C]">Own or manage this clinic?</h3>
+                <p className="text-sm text-[#2C3E50] mb-4">
+                  Claim your listing to manage your profile, respond to appointment requests, and unlock premium features.
+                </p>
+                <ClaimClinicModal 
+                  clinicId={clinic.place_id}
+                  clinicName={clinic.clinic_name}
+                />
+              </CardContent>
+            </Card>
+
+            {/* About Madison Vet Finder */}
+            <Card className="bg-gradient-to-br from-[#0F3A5C] to-[#1A4D6D] text-white shadow-md">
               <CardContent className="pt-6">
                 <h3 className="font-semibold mb-2">Are you a veterinary clinic?</h3>
-                <p className="text-sm text-slate-600 mb-4">
-                  Get more appointment requests and grow your practice with VetFinderPro.
+                <p className="text-sm text-[#E8EEF5] mb-4">
+                  Get more appointment requests and grow your practice with Madison Vet Finder.
                 </p>
-                <Button variant="outline" className="w-full" asChild>
+                <Button variant="outline" className="w-full border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0F3A5C] font-semibold" asChild>
                   <Link href="/for-clinics">
                     Learn More
                   </Link>
@@ -291,6 +323,35 @@ export default async function ClinicPage({ params }: { params: Promise<{ slug: s
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-[#0F3A5C] to-[#1A4D6D] text-white mt-12 border-t-4 border-[#D4AF37]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h3 className="font-bold text-lg mb-2">Madison Vet Finder</h3>
+              <p className="text-[#D4AF37] text-sm">Find trusted Madison vets. Fast.</p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">For Pet Owners</h4>
+              <ul className="text-sm space-y-1 text-[#E8EEF5]">
+                <li><a href="/" className="hover:text-[#D4AF37] transition-colors">Browse Clinics</a></li>
+                <li><a href="/" className="hover:text-[#D4AF37] transition-colors">Request Appointment</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">For Clinics</h4>
+              <ul className="text-sm space-y-1 text-[#E8EEF5]">
+                <li><a href="/for-clinics" className="hover:text-[#D4AF37] transition-colors">Claim Your Clinic</a></li>
+                <li><a href="/for-clinics" className="hover:text-[#D4AF37] transition-colors">Get More Appointments</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-[#1A4D6D] pt-6 text-center text-sm text-[#E8EEF5]">
+            <p>© 2025 Madison Vet Finder. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

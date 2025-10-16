@@ -2,67 +2,326 @@ $ next dev --turbopack
  ⚠ Invalid next.config.ts options detected: 
  ⚠     Unrecognized key(s) in object: 'allowedDevOrigins' at "experimental"
  ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ Port 3000 is in use by an unknown process, using available port 3001 instead.
    ▲ Next.js 15.5.3 (Turbopack)
-   - Local:        http://localhost:3000
-   - Network:      http://169.254.0.21:3000
+   - Local:        http://localhost:3001
+   - Network:      http://169.254.0.21:3001
    - Environments: .env.local
    - Experiments (use with caution):
      · allowedDevOrigins
 
  ✓ Starting...
- ✓ Ready in 1490ms
+ ✓ Ready in 2.2s
  ○ Compiling / ...
- ✓ Compiled / in 6.6s
- GET / 200 in 7338ms
- ⚠ Cross origin request detected from smart-pots-tickle.lindy.site to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
-Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ✓ Compiled / in 7.1s
+ GET / 200 in 7959ms
+ GET / 200 in 212ms
  ○ Compiling /favicon.ico ...
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 1479ms
- ✓ Compiled /favicon.ico in 1615ms
- GET /api/cities 200 in 2095ms
- GET /api/clinics? 200 in 1863ms
- GET /api/clinics? 200 in 528ms
- GET / 200 in 192ms
- GET /api/cities 200 in 636ms
- GET /api/clinics? 200 in 833ms
- GET /api/clinics? 200 in 515ms
- GET / 200 in 757ms
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 353ms
- GET /api/cities 200 in 1126ms
- GET /api/clinics? 200 in 1059ms
- GET /api/clinics? 200 in 531ms
+ ⚠ Cross origin request detected from vet-directory.lindy.site to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 881ms
+ ✓ Compiled /favicon.ico in 1043ms
+ GET /api/cities 200 in 1506ms
+ GET /api/clinics? 200 in 1901ms
+ GET /api/clinics? 200 in 635ms
  ○ Compiling /clinic/[slug] ...
- ✓ Compiled /clinic/[slug] in 1073ms
-Error: Route "/clinic/[slug]" used `params.slug`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
-    at ClinicPage (app/clinic/[slug]/page.tsx:64:41)
-  62 |
-  63 | export default async function ClinicPage({ params }: { params: { slug: string } }) {
-> 64 |   const clinic = await getClinic(params.slug);
-     |                                         ^
-  65 |
-  66 |   if (!clinic) {
-  67 |     notFound();
-Error: Route "/clinic/[slug]" used `params.slug`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
-    at Module.generateMetadata (app/clinic/[slug]/page.tsx:44:41)
-  42 |
-  43 | export async function generateMetadata({ params }: { params: { slug: string } }) {
-> 44 |   const clinic = await getClinic(params.slug);
-     |                                         ^
-  45 |   
-  46 |   if (!clinic) {
-  47 |     return {
- GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 3124ms
- ✓ Compiled in 329ms
- ✓ Compiled /clinic/[slug] in 42ms
- GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 1047ms
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 282ms
- GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 623ms
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 272ms
- GET / 200 in 111ms
- GET /api/cities 200 in 497ms
- GET /api/clinics? 200 in 712ms
- GET /api/cities 200 in 416ms
- GET /api/clinics? 200 in 509ms
+ ✓ Compiled /clinic/[slug] in 909ms
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 2431ms
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 275ms
+ GET / 200 in 85ms
+ GET /api/cities 200 in 454ms
+ GET /api/clinics? 200 in 547ms
+ GET /api/cities 200 in 397ms
  GET /api/clinics? 200 in 493ms
- GET /api/clinics? 200 in 496ms
- HEAD / 200 in 179ms
+ GET /api/clinics? 200 in 490ms
+ GET /api/clinics? 200 in 471ms
+ GET /clinic/banfield-pet-hospital-ChIJyT41 200 in 329ms
+ GET / 200 in 85ms
+ GET /api/cities 200 in 402ms
+ GET /api/clinics? 200 in 672ms
+ GET /api/cities 200 in 531ms
+ GET /api/clinics? 200 in 502ms
+ GET /api/clinics? 200 in 654ms
+ GET /api/clinics? 200 in 489ms
+ GET /api/clinics?sortBy=rating 200 in 640ms
+ GET /api/clinics? 200 in 557ms
+ GET /api/clinics?city=Black+Earth 200 in 402ms
+ GET / 200 in 201ms
+ GET /api/cities 200 in 466ms
+ GET /api/clinics? 200 in 790ms
+ GET /api/clinics? 200 in 470ms
+ GET /api/clinics? 200 in 774ms
+ GET / 200 in 2793ms
+ GET /api/cities 200 in 2327ms
+ GET /api/clinics? 200 in 2495ms
+ GET /api/clinics? 200 in 531ms
+Error: Cannot apply unknown utility class `hover:text-navy-light`
+    [2m[at onInvalidCandidate (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:18:1529)][0m
+    [2m[at ge (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:13:29888)][0m
+    [2m[at /home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:18:373][0m
+    [2m[at L (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:3:1656)][0m
+    [2m[at je (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:18:172)][0m
+    [2m[at bi (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:35:780)][0m
+    [2m[at async yi (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:35:1123)][0m
+    [2m[at async Or (/home/code/vet-directory/node_modules/@tailwindcss/node/dist/index.js:10:3384)][0m
+    [2m[at async W (/home/code/vet-directory/node_modules/@tailwindcss/postcss/dist/index.js:10:4048)][0m
+    [2m[at async Object.Once (/home/code/vet-directory/node_modules/@tailwindcss/postcss/dist/index.js:10:4898)][0m
+Error: Cannot apply unknown utility class `hover:text-navy-light`
+    [2m[at onInvalidCandidate (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:18:1529)][0m
+    [2m[at ge (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:13:29888)][0m
+    [2m[at /home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:18:373][0m
+    [2m[at L (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:3:1656)][0m
+    [2m[at je (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:18:172)][0m
+    [2m[at bi (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:35:780)][0m
+    [2m[at async yi (/home/code/vet-directory/node_modules/tailwindcss/dist/lib.js:35:1123)][0m
+    [2m[at async Or (/home/code/vet-directory/node_modules/@tailwindcss/node/dist/index.js:10:3384)][0m
+    [2m[at async W (/home/code/vet-directory/node_modules/@tailwindcss/postcss/dist/index.js:10:4048)][0m
+    [2m[at async Object.Once (/home/code/vet-directory/node_modules/@tailwindcss/postcss/dist/index.js:10:4318)][0m
+ ✓ Compiled in 1018ms
+ ✓ Compiled in 567ms
+ ✓ Compiled in 388ms
+ ✓ Compiled in 6ms
+ ✓ Compiled / in 56ms
+ GET / 200 in 709ms
+ ⨯ The requested resource "/logo.png" has type "image/svg+xml" but dangerouslyAllowSVG is disabled. Consider adding the "unoptimized" property to the <Image>.
+ GET /api/cities 200 in 778ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 265ms
+ GET /api/clinics? 200 in 748ms
+ GET /api/clinics? 200 in 547ms
+ ✓ Compiled in 818ms
+ ✓ Compiled in 351ms
+ GET / 200 in 245ms
+ ✓ Compiled in 505ms
+ GET / 200 in 601ms
+ ⨯ The requested resource "/logo.png" has type "image/svg+xml" but dangerouslyAllowSVG is disabled. Consider adding the "unoptimized" property to the <Image>.
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 284ms
+ GET /api/cities 200 in 823ms
+ GET /api/clinics? 200 in 832ms
+ GET /api/clinics? 200 in 533ms
+ ✓ Compiled in 410ms
+ GET / 200 in 253ms
+ GET / 200 in 565ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 352ms
+ GET /api/cities 200 in 613ms
+ GET /api/clinics? 200 in 72 ✓ Compiled in 613ms
+ ✓ Compiled in 493ms
+ ✓ Compiled in 405ms
+ ✓ Compiled in 312ms
+ ✓ Compiled in 429ms
+ ⨯ ./app/clinic/[slug]/page.tsx:10:1
+Module not found: Can't resolve '@/components/appointment-request-button'
+[0m [90m  8 |[39m [36mimport[39m { [33mHeader[39m } [36mfrom[39m [32m'@/components/header'[39m[33m;[39m
+ [90m  9 |[39m [36mimport[39m { [33mClaimClinicModal[39m } [36mfrom[39m [32m'@/components/claim-clinic-modal'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 10 |[39m [36mimport[39m { [33mAppointmentRequestButton[39m } [36mfrom[39m [32m'@/components/appointment-request-button'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 11 |[39m
+ [90m 12 |[39m [90m// Generate static params for all clinics[39m
+ [90m 13 |[39m [36mexport[39m [36masync[39m [36mfunction[39m generateStaticParams() {[0m
+
+Import map: aliased to relative './components/appointment-request-button' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ ⨯ ./app/clinic/[slug]/page.tsx:10:1
+Module not found: Can't resolve '@/components/appointment-request-button'
+[0m [90m  8 |[39m [36mimport[39m { [33mHeader[39m } [36mfrom[39m [32m'@/components/header'[39m[33m;[39m
+ [90m  9 |[39m [36mimport[39m { [33mClaimClinicModal[39m } [36mfrom[39m [32m'@/components/claim-clinic-modal'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 10 |[39m [36mimport[39m { [33mAppointmentRequestButton[39m } [36mfrom[39m [32m'@/components/appointment-request-button'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 11 |[39m
+ [90m 12 |[39m [90m// Generate static params for all clinics[39m
+ [90m 13 |[39m [36mexport[39m [36masync[39m [36mfunction[39m generateStaticParams() {[0m
+
+Import map: aliased to relative './components/appointment-request-button' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ ✓ Compiled in 323ms
+ ✓ Compiled in 975ms
+ ✓ Compiled in 433ms
+ ✓ Compiled in 965ms
+et-s-mixed-mobile-veterinary-practice-ChIJq9_0 500 in 2895ms
+ ⨯ ./app/clinic/[slug]/page.tsx:11:10
+Ecmascript file had an error
+[0m [90m  9 |[39m [36mimport[39m { [33mClaimClinicModal[39m } [36mfrom[39m [32m'@/components/claim-clinic-modal'[39m[33m;[39m
+ [90m 10 |[39m [36mimport[39m { [33mAppointmentRequestModal[39m } [36mfrom[39m [32m'@/components/appointment-request-modal'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 12 |[39m
+ [90m 13 |[39m [90m// Generate static params for all clinics[39m
+ [90m 14 |[39m [36mexport[39m [36masync[39m [36mfunction[39m generateStaticParams() {[0m
+
+You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 500 in 109ms
+ ⨯ ./app/clinic/[slug]/page.tsx:10:1
+Module not found: Can't resolve '@/components/appointment-request-button'
+[0m [90m  8 |[39m [36mimport[39m { [33mHeader[39m } [36mfrom[39m [32m'@/components/header'[39m[33m;[39m
+ [90m  9 |[39m [36mimport[39m { [33mClaimClinicModal[39m } [36mfrom[39m [32m'@/components/claim-clinic-modal'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 10 |[39m [36mimport[39m { [33mAppointmentRequestButton[39m } [36mfrom[39m [32m'@/components/appointment-request-button'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 11 |[39m
+ [90m 12 |[39m [90m// Generate static params for all clinics[39m
+ [90m 13 |[39m [36mexport[39m [36masync[39m [36mfunction[39m generateStaticParams() {[0m
+
+Import map: aliased to relative './components/appointment-request-button' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ ⨯ ./app/clinic/[slug]/page.tsx:10:1
+Module not found: Can't resolve '@/components/appointment-request-button'
+[0m [90m  8 |[39m [36mimport[39m { [33mHeader[39m } [36mfrom[39m [32m'@/components/header'[39m[33m;[39m
+ [90m  9 |[39m [36mimport[39m { [33mClaimClinicModal[39m } [36mfrom[39m [32m'@/components/claim-clinic-modal'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 10 |[39m [36mimport[39m { [33mAppointmentRequestButton[39m } [36mfrom[39m [32m'@/components/appointment-request-button'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 11 |[39m
+ [90m 12 |[39m [90m// Generate static params for all clinics[39m
+ [90m 13 |[39m [36mexport[39m [36masync[39m [36mfunction[39m generateStaticParams() {[0m
+
+Import map: aliased to relative './components/appointment-request-button' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ ✓ Compiled in 298ms
+ ✓ Compiled /clinic/[slug] in 46ms
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 1652ms
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 554ms
+ GET / 200 in 190ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 281ms
+ GET /api/clinics? 200 in 800ms
+ GET /api/cities 200 in 433ms
+ GET /api/clinics? 200 in 460ms
+ GET /clinic/and-dogs-too-veterinary-clinic-ChIJ_1O- 200 in 511ms
+ GET / 200 in 118ms
+ GET /api/cities 200 in 413ms
+ GET /api/clinics? 200 in 487ms
+ GET /api/cities 200 in 392ms
+ GET /api/clinics? 200 in 459ms
+ GET /api/clinics? 200 in 474ms
+ GET /api/clinics? 200 in 501ms
+ GET /clinic/a-breed-apart-animal-hospital-ChIJuQBl 200 in 324ms
+ ✓ Compiled in 453ms
+ GET /clinic/a-breed-apart-animal-hospital-ChIJuQBl 200 in 672ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 261ms
+ GET / 200 in 238ms
+ GET /api/cities 200 in 413ms
+ GET /api/clinics? 200 in 498ms
+ GET /api/cities 200 in 375ms
+ GET /api/clinics? 200 in 475ms
+ GET /api/clinics? 200 in 467ms
+ GET /api/clinics? 200 in 457ms
+ GET / 200 in 458ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 257ms
+ GET /api/cities 200 in 397ms
+ GET /api/clinics? 200 in 484ms
+ GET /api/clinics? 200 in 456ms
+ GET /favicon.ico 200 in 276ms
+ GET / 200 in 607ms
+ GET /api/cities 200 in 607ms
+ GET /api/clinics? 200 in 560ms
+ GET /api/clinics? 200 in 649ms
+ GET / 200 in 219ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 261ms
+ GET /api/cities 200 in 405ms
+ GET /api/clinics? 200 in 504ms
+ GET /api/clinics? 200 in 515ms
+ GET / 200 in 215ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 261ms
+ GET /api/cities 200 in 890ms
+ GET /api/clinics? 200 in 897ms
+ GET /api/clinics? 200 in 513ms
+ GET /clinic/a-breed-apart-animal-hospital-ChIJuQBl 200 in 385ms
+ GET / 200 in 120ms
+ GET /api/cities 200 in 418ms
+ GET /api/clinics? 200 in 546ms
+ GET /api/cities 200 in 401ms
+ GET /api/clinics? 200 in 486ms
+ GET /api/clinics? 200 in 475ms
+ GET /api/clinics? 200 in 478ms
+ ✓ Compiled in 729ms
+ ✓ Compiled in 995ms
+ GET / 200 in 1388ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 271ms
+ GET /api/cities 200 in 639ms
+ GET /api/clinics? 200 in 525ms
+ GET /api/clinics? 200 in 503ms
+ ✓ Compiled in 404ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 630ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 278ms
+ GET /api/cities 200 in 426ms
+ GET /api/clinics? 200 in 517ms
+ GET / 200 in 197ms
+ GET /api/clinics? 200 in 551ms
+ GET /api/cities 200 in 409ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 260ms
+ GET /api/clinics? 200 in 479ms
+ GET /api/clinics? 200 in 917ms
+ GET / 200 in 203ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 287ms
+ GET /api/cities 200 in 481ms
+ GET /api/clinics? 200 in 516ms
+ GET /api/clinics? 200 in 495ms
+ ✓ Compiled /clinic/[slug] in 45ms
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 768ms
+ GET / 200 in 227ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 277ms
+ GET /api/cities 200 in 435ms
+ GET /api/clinics? 200 in 557ms
+ GET /api/clinics? 200 in 502ms
+ ✓ Compiled in 428ms
+ ✓ Compiled /clinic/[slug] in 43ms
+ GET / 200 in 271ms
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 842ms
+ GET /clinic/3mvp-margaret-s-mixed-mobile-veterinary-practice-ChIJq9_0 200 in 1455ms
+ GET / 200 in 226ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 262ms
+ GET /api/cities 200 in 428ms
+ GET /api/clinics? 200 in 559ms
+ GET /api/clinics? 200 in 500ms
+ GET / 200 in 179ms
+ GET /api/cities 200 in 602ms
+ GET /api/clinics? 200 in 558ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 284ms
+ GET /api/clinics? 200 in 480ms
+ GET / 200 in 209ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 272ms
+ GET /api/cities 200 in 453ms
+ GET /api/clinics? 200 in 469ms
+ GET /api/clinics? 200 in 510ms
+ ✓ Compiled in 871ms
+ GET / 200 in 1038ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 280ms
+ GET /api/cities 200 in 921ms
+ GET /api/clinics? 200 in 706ms
+ GET /api/clinics? 200 in 529ms
+ GET / 200 in 250ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 272ms
+ GET /api/cities 200 in 424ms
+ GET /api/clinics? 200 in 468ms
+ GET /api/clinics? 200 in 495ms
+ GET / 200 in 184ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 258ms
+ GET /api/cities 200 in 709ms
+ GET /api/clinics? 200 in 710ms
+ GET /api/clinics? 200 in 637ms
+ GET / 200 in 292ms
+ GET / 200 in 182ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 358ms
+ GET /api/cities 200 in 1043ms
+ GET /api/clinics? 200 in 1316ms
+ GET /api/clinics? 200 in 722ms

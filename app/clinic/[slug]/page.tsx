@@ -32,7 +32,6 @@ export default function ClinicPage({ params }: ClinicPageProps) {
         .single();
 
       if (error || !data) {
-        // Handle not found
         return;
       }
       setClinic(data);
@@ -49,7 +48,6 @@ export default function ClinicPage({ params }: ClinicPageProps) {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Back Link */}
       <div className="bg-[#F5F7FA] border-b border-[#E8EEF5]">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <Link href="/" className="text-[#0F3A5C] hover:text-[#D4AF37] font-medium transition-colors flex items-center gap-1">
@@ -60,9 +58,7 @@ export default function ClinicPage({ params }: ClinicPageProps) {
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Header Section */}
             <div className="space-y-4">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -98,7 +94,6 @@ export default function ClinicPage({ params }: ClinicPageProps) {
                 </Button>
               </div>
 
-              {/* Badges */}
               <div className="flex flex-wrap gap-2">
                 {clinic.services && clinic.services.map((service: string) => (
                   <Badge key={service} variant="secondary" className="bg-[#E8EEF5] text-[#0F3A5C]">
@@ -108,7 +103,6 @@ export default function ClinicPage({ params }: ClinicPageProps) {
               </div>
             </div>
 
-            {/* Contact Information */}
             <Card className="border-[#E8EEF5]">
               <CardContent className="pt-6 space-y-4">
                 <h2 className="text-xl font-semibold text-[#0F3A5C]">Contact Information</h2>
@@ -163,7 +157,6 @@ export default function ClinicPage({ params }: ClinicPageProps) {
               </CardContent>
             </Card>
 
-            {/* Description */}
             {clinic.description && (
               <Card className="border-[#E8EEF5]">
                 <CardContent className="pt-6">
@@ -173,7 +166,6 @@ export default function ClinicPage({ params }: ClinicPageProps) {
               </Card>
             )}
 
-            {/* Map */}
             {clinic.latitude && clinic.longitude && (
               <Card className="border-[#E8EEF5] overflow-hidden">
                 <MapView
@@ -185,9 +177,7 @@ export default function ClinicPage({ params }: ClinicPageProps) {
             )}
           </div>
 
-          {/* Sidebar */}
           <div className="space-y-6">
-            {/* Appointment Request */}
             <Card className="border-[#E8EEF5] bg-gradient-to-br from-[#0F3A5C] to-[#1a5a8c] text-white">
               <CardContent className="pt-6">
                 <h3 className="text-lg font-semibold mb-4">Request an Appointment</h3>
@@ -195,7 +185,6 @@ export default function ClinicPage({ params }: ClinicPageProps) {
               </CardContent>
             </Card>
 
-            {/* Additional Info */}
             <Card className="border-[#E8EEF5]">
               <CardContent className="pt-6 space-y-4">
                 {clinic.acceptingNewPatients !== undefined && (
@@ -232,7 +221,6 @@ export default function ClinicPage({ params }: ClinicPageProps) {
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="bg-[#0F3A5C] text-white mt-16">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -277,4 +265,3 @@ export default function ClinicPage({ params }: ClinicPageProps) {
     </div>
   );
 }
-// Force rebuild

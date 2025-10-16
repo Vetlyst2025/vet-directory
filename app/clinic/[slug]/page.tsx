@@ -19,8 +19,27 @@ interface ClinicPageProps {
   };
 }
 
+interface Clinic {
+  id: number;
+  name: string;
+  slug: string;
+  address: string;
+  phone: string;
+  site: string;
+  hours: string;
+  description: string;
+  rating: number;
+  reviewCount: number;
+  services: string[];
+  specialties: string[];
+  acceptingNewPatients: boolean;
+  emergencyServices: boolean;
+  latitude: number;
+  longitude: number;
+}
+
 export default function ClinicPage({ params }: ClinicPageProps) {
-  const [clinic, setClinic] = React.useState<any>(null);
+  const [clinic, setClinic] = useState<Clinic | null>(null);
   const [claimModalOpen, setClaimModalOpen] = useState(false);
 
   React.useEffect(() => {
@@ -34,7 +53,7 @@ export default function ClinicPage({ params }: ClinicPageProps) {
       if (error || !data) {
         return;
       }
-      setClinic(data);
+      setClinic(data as Clinic);
     };
 
     fetchClinic();

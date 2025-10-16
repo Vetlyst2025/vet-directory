@@ -9,7 +9,7 @@ export async function GET() {
     const supabase = createClient(supabaseUrl, supabaseKey);
     
     // First, let's check if the columns already exist
-    const { data: existingData, error: checkError } = await supabase
+    const { error: checkError } = await supabase
       .from('clinics_madison_wi')
       .select('id, accepts_appointments, is_featured')
       .limit(1);
@@ -27,7 +27,7 @@ export async function GET() {
       .select();
 
     // Check if appointment_requests table exists
-    const { data: appointmentTest, error: appointmentError } = await supabase
+    const { error: appointmentError } = await supabase
       .from('appointment_requests')
       .select('*')
       .limit(1);

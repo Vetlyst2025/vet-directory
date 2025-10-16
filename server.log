@@ -144,7 +144,8 @@ https://nextjs.org/docs/messages/module-not-found
  ✓ Compiled in 975ms
  ✓ Compiled in 433ms
  ✓ Compiled in 965ms
-et-s-mixed-mobile-veterinary-practice-ChIJq9_0 500 in 2895ms
+ ✓ Compiled in 652ms
+inary-practice-ChIJq9_0 500 in 2895ms
  ⨯ ./app/clinic/[slug]/page.tsx:11:10
 Ecmascript file had an error
 [0m [90m  9 |[39m [36mimport[39m { [33mClaimClinicModal[39m } [36mfrom[39m [32m'@/components/claim-clinic-modal'[39m[33m;[39m
@@ -325,3 +326,4 @@ https://nextjs.org/docs/messages/module-not-found
  GET /api/cities 200 in 1043ms
  GET /api/clinics? 200 in 1316ms
  GET /api/clinics? 200 in 722ms
+ ✓ Compiled in 688ms

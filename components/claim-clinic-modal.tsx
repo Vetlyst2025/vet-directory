@@ -97,7 +97,7 @@ export function ClaimClinicModal({ clinicId, clinicName }: ClaimClinicModalProps
             <CheckCircle2 className="h-16 w-16 text-green-600 mx-auto" />
             <h3 className="text-xl font-semibold text-green-900">Claim Submitted Successfully!</h3>
             <p className="text-slate-600">
-              We'll review your claim and contact you at {formData.claimantEmail} within 1-2 business days.
+              WeWe'll reviewapos;ll review your claim and contact you at {formData.claimantEmail} within 1-2 business days.
             </p>
           </div>
         ) : (
@@ -195,7 +195,7 @@ export function ClaimClinicModal({ clinicId, clinicName }: ClaimClinicModalProps
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-slate-700">
               <p className="font-semibold mb-2">What happens next?</p>
               <ul className="space-y-1 list-disc list-inside">
-                <li>We'll review your claim within 1-2 business days</li>
+                <li>WeWe'll reviewapos;ll review your claim within 1-2 business days</li>
                 <li>You may be contacted for verification</li>
                 <li>Once approved, you'll get access to your clinic dashboard</li>
                 <li>Manage your profile, hours, and appointment requests</li>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function Header() {
   return (
@@ -7,10 +8,11 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex items-center justify-between">
         {/* Logo on the left - 2x larger */}
         <Link href="/" className="flex-shrink-0">
-          <img
+          <Image
             src="/logo.png"
             alt="Madison Vet Finder"
-            className="h-auto"
+            width={160}
+            height={160}
             style={{ maxHeight: '160px', objectFit: 'contain' }}
           />
         </Link>

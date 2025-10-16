@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 
 export default function SetupInstructions() {
   const sql = `-- Create appointment_requests table
@@ -44,7 +45,7 @@ WHERE id IN (1, 2, 3, 4, 5);`;
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <h2 className="text-lg font-semibold mb-2">📋 Instructions:</h2>
               <ol className="list-decimal list-inside space-y-2 text-slate-700">
-                <li>Go to your <a href="https://supabase.com/dashboard/project/qklnxfkwjpdboqawxpts/editor" target="_blank" className="text-blue-600 hover:underline">Supabase SQL Editor</a></li>
+                <li>Go to your <Link href="https://supabase.com/dashboard/project/qklnxfkwjpdboqawxpts/editor" target="_blank" className="text-blue-600 hover:underline">Supabase SQL Editor</Link></li>
                 <li>Click &quot;SQL Editor&quot; in the left sidebar</li>
                 <li>Click &quot;New Query&quot;</li>
                 <li>Copy the SQL below and paste it into the editor</li>
@@ -90,12 +91,12 @@ WHERE id IN (1, 2, 3, 4, 5);`;
             </div>
 
             <div className="text-center pt-4">
-              <a 
+              <Link 
                 href="/"
                 className="inline-block px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors"
               >
                 ← Back to Directory
-              </a>
+              </Link>
             </div>
           </div>
         </div>

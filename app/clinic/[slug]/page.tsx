@@ -20,7 +20,7 @@ interface ClinicPageProps {
 }
 
 interface Clinic {
-  id: number;
+  id: string;
   email?: string;
   name: string;
   slug: string;

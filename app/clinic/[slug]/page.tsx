@@ -56,7 +56,27 @@ export default function ClinicPage({ params }: ClinicPageProps) {
       if (error || !data) {
         return;
       }
-      setClinic(data as Clinic);
+        // Map database fields to Clinic interface
+              const mappedClinic: Clinic = {
+                          id: data.place_id || '',
+                          email: data.email || '',
+                          name: data.clinic_name || '',
+                          slug: params.slug,
+                          address: data.formatted_address || '',
+                          phone: data.phone_number || '',
+                          site: data.website || '',
+                          hours: data.hours || '',
+                          description: data.description || '',
+                          rating: data.rating || 0,
+                          reviewCount: data.review_count || 0,
+                          services: data.services || [],
+                          specialties: data.specialties || [],
+                          acceptingNewPatients: data.accepting_new_patients || false,
+                          emergencyServices: data.emergency_services || false,
+                          latitude: data.latitude || 0,
+                          longitude: data.longitude || 0,
+              };
+              setClinic(mappedClinic);
     };
 
     fetchClinic();

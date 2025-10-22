@@ -3,6 +3,6 @@ export function createClinicSlug(name: string, placeId: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
-  const shortId = placeId.substring(0, 8);
+    const shortId = placeId;
   return `${nameSlug}-${shortId}`;
 }

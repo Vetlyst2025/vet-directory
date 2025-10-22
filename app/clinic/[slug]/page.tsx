@@ -45,10 +45,12 @@ export default function ClinicPage({ params }: ClinicPageProps) {
 
   React.useEffect(() => {
     const fetchClinic = async () => {
+          // Extract place_id from slug (format: clinic-name-placeId)
+          const placeId = params.slug.split('-').pop() || '';
       const { data, error } = await supabase
-        .from("clinics")
+        .from("clinics_madison_wi")
         .select("*")
-        .eq("slug", params.slug)
+        .eq("place_id", placeId)
         .single();
 
       if (error || !data) {
